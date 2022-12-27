@@ -60,11 +60,13 @@ export class EventPageComponent {
 
   setSelectedEventCat(cat: string): void {
     this.selectedEventCat = cat;
+    this.pageNumber = 1;
     this.navigateTo();
   }
 
   setSelectedSubcat(subcat: string): void {
     this.selectedSubcat = subcat;
+    this.pageNumber = 1;
     this.navigateTo();
   }
 

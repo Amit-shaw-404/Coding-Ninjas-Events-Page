@@ -1,5 +1,15 @@
 <div class="card-container">
-    <img class="card-img" src={{this.cnevent?.cover_picture}} />
+    <div style="width:100%; height: max-content; position: relative;">
+        <img class="card-img" src={{this.cnevent?.cover_picture}} />
+        <div *ngIf="this.isRegistrationValid(this.cnevent?.registration_start_time, this.cnevent?.registration_end_time)"
+            class="reg-open">
+            <img src="../../assets/images/alert.gif" style="height: 15px; width:15px;"  />
+            <p>Registration
+                <strong>open</strong> till <strong>{{this.registrationEndDate(this.cnevent?.registration_end_time)}}
+                </strong>
+            </p>
+        </div>
+    </div>
 
     <div class="card-content">
         <h2>{{this.cnevent?.name}}</h2>
@@ -39,9 +49,13 @@
                     class="participated-avatar" />
             </div>
             <p *ngIf="this.cnevent?.registered_users?.show_users_count" class="p-count">and
-                <strong style="color:#000000; font-weight:700; font-size:14px">{{this.cnevent?.registered_users?.other_users_count}}</strong> others are partcipating</p>
+                <strong
+                    style="color:#000000; font-weight:700; font-size:14px">{{this.cnevent?.registered_users?.other_users_count}}</strong>
+                others are partcipating
+            </p>
         </div>
-        <div class="register" *ngIf="this.isRegistrationValid(this.cnevent?.registration_start_time, this.cnevent?.registration_end_time)">
+        <div class="register"
+            *ngIf="this.isRegistrationValid(this.cnevent?.registration_start_time, this.cnevent?.registration_end_time)">
             <button class="register-btn">REGISTER NOW</button>
         </div>
     </div>

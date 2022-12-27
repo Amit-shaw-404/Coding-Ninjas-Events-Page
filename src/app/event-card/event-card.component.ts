@@ -26,14 +26,30 @@ export class EventCardComponent {
   convertDate(data: any): string {
     let months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
     let date = new Date(data*1000);
-    let hours = this.addZero(date.getHours());
+    let hrs = date.getHours()
     let minutes = this.addZero(date.getMinutes());
     let meta = date.getHours() >=12? "PM": "AM";
     let day = this.addZero(date.getDay());
     let month = months_arr[date.getMonth()];
     let year = date.getFullYear();
+    let val = hrs > 12? (+hrs-12): +hrs;
+    let hours = this.addZero(val===0? 12: val);
 
     return hours+":"+minutes+" "+meta+", "+day+" "+month+" "+year;
+  }
+
+  registrationEndDate(data:any): string{
+    let months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+    let date = new Date(data*1000);
+    let hrs = date.getHours()
+    let minutes = this.addZero(date.getMinutes());
+    let meta = date.getHours() >=12? "PM": "AM";
+    let day = this.addZero(date.getDay());
+    let month = months_arr[date.getMonth()];
+    let val = hrs > 12? (+hrs-12): +hrs;
+    let hours = this.addZero(val===0? 12: val);
+
+    return day + " " + month +", " + hours + ":" + minutes + " " + meta;
   }
 
   getSubarray(tags: string[]): string[]{
