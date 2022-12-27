@@ -1,0 +1,48 @@
+<div class="card-container">
+    <img class="card-img" src={{this.cnevent?.cover_picture}} />
+
+    <div class="card-content">
+        <h2>{{this.cnevent?.name}}</h2>
+
+        <div class="card-metadata">
+            <div class="matadata-1">
+                <p class="key">Starts on</p>
+                <p class="value">{{this.convertDate(this.cnevent?.start_time)}}</p>
+            </div>
+            <div class="matadata-1">
+                <p class="key">Entry Fee</p>
+                <p class="value">{{this.cnevent?.fees === 0? "Free": this.cnevent.fees}}</p>
+            </div>
+            <div class="matadata-1">
+                <p class="key">Venue</p>
+                <p class="value">{{this.cnevent?.venue}}</p>
+            </div>
+
+        </div>
+
+        <div class="card-description">
+            <p>{{this.cnevent?.short_desc}}</p>
+        </div>
+
+        <div class="card-tags">
+            <div class="card-tag-main" *ngFor="let tag of getSubarray(this.cnevent?.card_tags)">
+                {{tag}}
+            </div>
+            <p class="tag-overflow" *ngIf="this.cnevent?.card_tags.length>3">+ {{this.cnevent?.card_tags?.length-3}}
+                more</p>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="participated">
+            <div class="participated-main">
+                <img *ngFor="let user of this.cnevent?.registered_users?.top_users" src={{user.image_url}}
+                    class="participated-avatar" />
+            </div>
+            <p *ngIf="this.cnevent?.registered_users?.show_users_count" class="p-count">and
+                <strong style="color:#000000; font-weight:700; font-size:14px">{{this.cnevent?.registered_users?.other_users_count}}</strong> others are partcipating</p>
+        </div>
+        <div class="register" *ngIf="this.isRegistrationValid(this.cnevent?.registration_start_time, this.cnevent?.registration_end_time)">
+            <button class="register-btn">REGISTER NOW</button>
+        </div>
+    </div>
+</div>

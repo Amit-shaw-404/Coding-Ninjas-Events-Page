@@ -1,0 +1,180 @@
+<app-header></app-header>
+
+<div class="events-container" #main *ngIf="!this.showMobileFilters">
+    <div class="events-main">
+        <div>
+            <p class="events-main-p1">EVENTS & NEWS</p>
+            <p class="events-main-p2">Learn, Compete and Grow </p>
+        </div>
+        <div class="all-events-container">
+            <div class="events-categories">
+                <div class="cat-container" *ngIf="this.selectedEventCat==='ALL_EVENTS'">
+                    <img src="../../../assets/images/all-events-selected.svg" />
+                    <p class="active-cat">All Events</p>
+                </div>
+                <div (click)="this.setSelectedEventCat('ALL_EVENTS')" class="cat-container"
+                    *ngIf="this.selectedEventCat!=='ALL_EVENTS'">
+                    <img src="../../../assets/images/all-events-unselected.svg" />
+                    <p class="cat">All Events</p>
+                </div>
+                <div class="cat-container" *ngIf="this.selectedEventCat==='WEBINAR'">
+                    <img src="../../../assets/images/webinar-selected.svg" />
+                    <p class="active-cat">Webinars</p>
+                </div>
+                <div (click)="this.setSelectedEventCat('WEBINAR')" class="cat-container"
+                    *ngIf="this.selectedEventCat!=='WEBINAR'">
+                    <img src="../../../assets/images/webinar-unselected.svg" />
+                    <p class="cat">Webinars</p>
+                </div>
+                <div class="cat-container" *ngIf="this.selectedEventCat==='CODING_EVENT'">
+                    <img src="../../../assets/images/coding-events-selected.svg" />
+                    <p class="active-cat">Coding Events</p>
+                </div>
+                <div (click)="this.setSelectedEventCat('CODING_EVENT')" class="cat-container"
+                    *ngIf="this.selectedEventCat!=='CODING_EVENT'">
+                    <img src="../../../assets/images/coding-events-unselected.svg" />
+                    <p class="cat">Coding Events</p>
+                </div>
+                <div class="cat-container" *ngIf="this.selectedEventCat==='BOOTCAMP_EVENT'">
+                    <img src="../../../assets/images/bootcamp_events_selected-5398.png" />
+                    <p class="active-cat">Bootcamp Events</p>
+                </div>
+                <div (click)="this.setSelectedEventCat('BOOTCAMP_EVENT')" class="cat-container"
+                    *ngIf="this.selectedEventCat!=='BOOTCAMP_EVENT'">
+                    <img src="../../../assets/images/bootcamp_events_unselected-5397.png" />
+                    <p class="cat">Bootcamp Events</p>
+                </div>
+                <div class="cat-container" *ngIf="this.selectedEventCat==='WORKSHOP'">
+                    <img src="../../../assets/images/workshop_selected-5396.png" />
+                    <p class="active-cat">Workshop</p>
+                </div>
+                <div (click)="this.setSelectedEventCat('WORKSHOP')" class="cat-container"
+                    *ngIf="this.selectedEventCat!=='WORKSHOP'">
+                    <img src="../../../assets/images/workshop_unselected-5395.png" />
+                    <p class="cat">Workshop</p>
+                </div>
+            </div>
+
+            <div class="all-events-subcat">
+                <div class="all-events-subcat-container">
+                    <p (click)="this.setSelectedSubcat('Upcoming')"
+                        [ngClass]="this.selectedSubcat == 'Upcoming'? 'active-subcat': 'subcat'"> Upcoming</p>
+                    <p (click)="this.setSelectedSubcat('Archived')"
+                        [ngClass]="this.selectedSubcat == 'Archived'? 'active-subcat': 'subcat'"> Archived</p>
+                    <p (click)="this.setSelectedSubcat('All Times Faviorites')"
+                        [ngClass]="this.selectedSubcat == 'All Times Faviorites'? 'active-subcat': 'subcat'"> All Times
+                        Faviorites</p>
+                </div>
+            </div>
+
+            <div class="event-cards-container">
+                <div *ngIf="this.allEvents.length>0" class="event-cards-container-main">
+                    <div class="all-cards-container" *ngFor="let event of allEvents">
+                        <app-event-card *ngIf="event" [cnevent]="event"></app-event-card>
+                    </div>
+                </div>
+                <div *ngIf="this.allEvents.length===0" class="not-found">
+                    <p>No Events Found</p>
+                </div>
+                <div class="event-tags-container" [ngClass]="this.shouldShowTag()? '': 'hide'">
+                    <p class="event-tags-container-head">TAGS</p>
+
+                    <div class="alltags">
+                        <div *ngFor="let tag of this.getAlTags()">
+                            <div (click)="this.unselectTag(tag)" class="tag-active" *ngIf="this.isSelectedTag(tag)">
+                                <p style="display:flex; max-width:100%; overflow-wrap: break-word; line-height: 15px;">
+                                    {{tag}}</p>
+                            </div>
+                            <div (click)="this.selectTag(tag)" class="tag-inactive" *ngIf="!this.isSelectedTag(tag)">
+                                <p
+                                    style="display:flex; max-width: 100%;  overflow-wrap: break-word; line-height: 15px;">
+                                    {{tag}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p class="show-all" *ngIf="!this.showAllTags" (click)="this.showAllTags = true">
+                        See {{this.allTags.length - 10}} more tags
+                    </p>
+                    <p class="show-all" *ngIf="this.showAllTags" (click)="this.showAllTags = false">
+                        Show less
+                    </p>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <div class="page-footer-main" >
+                    <button *ngIf="this.pageNumber>1" class="page-change-button"
+                        (click)="this.changePage(-1)">
+                        <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 10L2 5.5L6 1" stroke="white" stroke-width="2" />
+                        </svg>
+                    </button>
+                    <button *ngIf="this.pageNumber<=1" class="page-change-button-disabled">
+                        <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 10L2 5.5L6 1" stroke="white" stroke-width="2" />
+                        </svg>
+                    </button>
+                    <p>Page</p>
+                    <form (ngSubmit)="this.preChangePage()">
+                    <input type="text" [disabled]="this.totalPages===1" value={{this.pageNumber}} class="page-input"
+                        #pagenumberinput /><button type="submit" style="visibility: hidden;"></button>
+                    </form>
+                    <p>out of {{this.totalPages}}</p>
+                    <button *ngIf="this.pageNumber >= this.totalPages" class="page-change-button-disabled">
+                        <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L5 5.5L1 10" stroke="white" stroke-width="2" />
+                        </svg>
+                    </button>
+                    <button *ngIf="this.pageNumber < this.totalPages" class="page-change-button"
+                        (click)="this.changePage(1)">
+                        <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L5 5.5L1 10" stroke="white" stroke-width="2" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!this.shouldShowTag()" class="bottom-filter" (click)="this.setShowMobileFilters(true)">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M5.33333 13.5833H18.6667V11.4167H5.33333V13.5833ZM2 6V8.16667H22V6H2ZM9.77778 19H14.2222V16.8333H9.77778V19Z"
+            fill="#757575" />
+    </svg>
+    <p>Filter Events</p>
+</div>
+
+<div class="filter-mobile-container" *ngIf="this.showMobileFilters">
+    <div>
+        <div class="bottom-shadow">
+            <div class="filter-header">
+                <svg (click)="this.setShowMobileFilters(false)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M20.9999 10.8751V13.1251H7.49993L13.6874 19.3126L12.0899 20.9101L3.17993 12.0001L12.0899 3.09009L13.6874 4.68759L7.49993 10.8751H20.9999Z"
+                        fill="#757575" />
+                </svg>
+                <p>Filter</p>
+            </div>
+        </div>
+        <div class="filter-mobile-main">
+            <div *ngFor="let tag of this.allTags">
+                <div (click)="this.unselectTag(tag)" class="tag-active" *ngIf="this.isSelectedTag(tag)">
+                    <p style="display:flex; max-width:100%; overflow-wrap: break-word; line-height: 15px;">
+                        {{tag}}</p>
+                </div>
+                <div (click)="this.selectTag(tag)" class="tag-inactive" *ngIf="!this.isSelectedTag(tag)">
+                    <p style="display:flex; max-width: 100%;  overflow-wrap: break-word; line-height: 15px;">
+                        {{tag}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="apply-btn" (click)="this.setShowMobileFilters(false)">
+        Apply Filter
+    </button>
+</div>
+
+<app-footer></app-footer>

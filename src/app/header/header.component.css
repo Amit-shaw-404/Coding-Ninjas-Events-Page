@@ -1,0 +1,139 @@
+
+.header-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color:#FFFFFF;
+    box-sizing: border-box;
+}
+
+.mobile-header-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color:#FFFFFF;
+    box-sizing: border-box;
+    padding:10px 20px;
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+  }
+  
+  
+.top {
+    background-color: #032d6b;
+}
+  
+.bottom {
+  background-color: #31204c;
+  z-index: 5;
+}
+  
+
+.header-main{
+    display: flex;
+    width:70%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.header-logo{
+    height:28px;
+    width:75px;
+}
+
+.header-auth-btns{
+    display:flex;
+    align-items: center;
+    gap:10px;
+    
+}
+.header-login-btn{
+    padding: 10px 30px;
+    border-radius: 7px;
+    border:none;
+    font-size: 13px;
+    color: #ea7334;
+    background-color: #fceee5;
+    height: max-content;
+}
+.header-login-btn:hover{
+    background-color: #fdc7a9;
+}
+
+.header-enroll-btn{
+    padding: 15px 30px;
+    border-radius: 7px;
+    border:none;
+    font-size: 13px;
+    color: #FFFFFF;
+    background-color: #ea7334;
+}
+.header-main p{
+    cursor: pointer;
+}
+
+.ham-menu{
+    cursor: pointer;
+}
+.stripe {
+    width: 35px;
+    height: 3px;
+    background-color: #FFFFFF;
+    margin: 6px 0;
+}
+
+.menu-container{
+    height: 100vh;
+    width:100vw;
+    position: fixed;
+    top:0;
+    background-color: #FFFFFF;
+    z-index:1000;
+}
+
+.menu-header{
+    display:flex;
+    background-color: #292A31;
+    width:100%;
+    padding:10px 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-nav-container{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    padding:20px;
+}
+
+.menu-option{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1200px) {
+    .header-main{
+        width:90%;
+    }
+}
+
+@media only screen and (min-width:700px) and (max-width: 900px) {
+    .header-main{
+        width:90%;
+    }
+    .header-enroll-btn{
+        padding: 10px 15px;
+    }
+    .header-login-btn{
+        padding: 10px 15px;
+    }
+}
