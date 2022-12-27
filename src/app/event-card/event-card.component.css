@@ -67,7 +67,7 @@
 .card-description{
     color:#616161;
     width:100%;
-    height: 80px;
+    min-height: 80px;
     font-size: 14px;
 }
 
